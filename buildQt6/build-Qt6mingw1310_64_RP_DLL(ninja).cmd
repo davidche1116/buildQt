@@ -65,6 +65,8 @@ cmake --install .
 cd ..
 
 ::编译qtpdf
+SET PATH=D:\a\buildQt\Tools\mingw1310_64\bin;D:\a\buildQt\ninja;%INSTALL_DIR%\bin;%PATH%
+git config --global core.longpaths true
 git clone https://code.qt.io/qt/qtwebengine.git
 cd qtwebengine
 git checkout 6.8.2
@@ -73,13 +75,20 @@ cd ..
 pip3 install html5lib
 mkdir build
 cd build
-qt-configure-module ../qtwebengine -- -DFEATURE_qtwebengine_build=OFF
+%INSTALL_DIR%\bin\qt-configure-module ../qtwebengine -- -DFEATURE_qtwebengine_build=OFF
 cmake --build . --parallel
 cmake --install .
 cd ..
 
 ::复制qt.conf
 copy %~dp0\qt.conf %INSTALL_DIR%\bin
+
+::编译qwindowkit
+SET PATH=D:\a\buildQt\Tools\mingw1310_64\bin;D:\a\buildQt\ninja;%INSTALL_DIR%\bin;%PATH%
+git clone --recursive https://github.com/stdware/qwindowkit
+cd qwindowkit
+cmake -B build -S . -DCMAKE_PREFIX_PATH=%INSTALL_DIR%\bin -DCMAKE_INSTALL_PREFIX=D:/qwindowkit -DQWINDOWKIT_BUILD_STATIC=TRUE -G "MinGW Makefiles"
+cmake --build build --target install --config Release
 
 ::@pause
 @cmd /k cd /d %INSTALL_DIR%
