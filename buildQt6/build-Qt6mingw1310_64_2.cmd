@@ -29,6 +29,9 @@ rmdir /s /q "%BUILD_DIR%"
 :: 定位到构建目录：
 mkdir "%BUILD_DIR%" && cd /d "%BUILD_DIR%"
 
+:: 安装 html5lib
+pip install html5lib
+
 :: configure
 call %SRC_QT%\configure.bat -static -static-runtime -release -prefix %INSTALL_DIR% -nomake examples -nomake tests -opensource -confirm-license -qt-libpng -qt-libjpeg -qt-zlib -qt-pcre -qt-freetype -schannel -platform win32-g++
 
