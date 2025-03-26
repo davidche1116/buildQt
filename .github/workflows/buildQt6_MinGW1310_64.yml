@@ -1,4 +1,4 @@
-name: build_Qt6.8.2_MinGW1310_64
+name: build_Qt6.8.2_MinGW_1310_64
 
 on: workflow_dispatch
 #on: [push, pull_request]
