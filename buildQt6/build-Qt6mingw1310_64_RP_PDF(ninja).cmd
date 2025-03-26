@@ -76,5 +76,11 @@ cd ..
 ::复制qt.conf
 copy %~dp0\qt.conf %INSTALL_DIR%\bin
 
+::编译qwindowkit
+git clone --recursive https://github.com/stdware/qwindowkit
+cd qwindowkit
+cmake -B build -S . -DCMAKE_INSTALL_PREFIX=D:/qwindowkit -DQWINDOWKIT_BUILD_STATIC=TRUE -G "MinGW Makefiles"
+cmake --build build --target install --config Release
+
 ::@pause
 @cmd /k cd /d %INSTALL_DIR%
