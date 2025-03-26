@@ -1,4 +1,4 @@
-name: build_Qt6.8.2_MinGW64_RP
+name: build_Qt6.8.2_MinGW1310_64_RP_DLL
 
 on: workflow_dispatch
 #on: [push, pull_request]
@@ -6,7 +6,7 @@ on: workflow_dispatch
 env:
   QT_VERSION: 6.8.2
   QT_VERSION2: 6.8
-  FILE_NAME: Qt_6.8.2-static-Release_mingw1420_64_UCRT_RP_DLL
+  FILE_NAME: Qt_6.8.2-static-Release_mingw1310_64_RP_DLL
 
 jobs:
   windows_mingw64_static_release:
@@ -24,12 +24,12 @@ jobs:
         python-version: '3.13'
         architecture: 'x64'
 
-    # 安装 MinGW64    
+    # 安装 MinGW1310_64    
     - name: Setup MinGW64
       run: |
         cd ..  #Directory: D:\a\buildQt
-        curl -L -o x86_64-release-posix-seh-ucrt.7z https://github.com/niXman/mingw-builds-binaries/releases/download/14.2.0-rt_v12-rev1/x86_64-14.2.0-release-posix-seh-ucrt-rt_v12-rev1.7z
-        7z x D:\a\buildQt\x86_64-release-posix-seh-ucrt.7z -oD:\a\buildQt
+        curl -L -o mingw1310.7z https://download.qt.io/online/qtsdkrepository/windows_x86/desktop/tools_mingw1310/qt.tools.win64_mingw1310/13.1.0-202407240918mingw1310.7z
+        7z x D:\a\buildQt\mingw1310.7z -oD:\a\buildQt
 
     # 安装 Ninja
     - name: Setup Ninja
@@ -68,7 +68,7 @@ jobs:
         unzip -q qtsvg-everywhere-src.zip -d ./${{env.QT_VERSION}}
 
         # 调用编译脚本
-        cmd.exe /c "call `"D:\a\buildQt\buildQt\buildQt6\build-Qt6mingw64_RP_DLL(ninja).cmd`""
+        cmd.exe /c "call `"D:\a\buildQt\buildQt\buildQt6\build-Qt6mingw1310_64_RP_DLL(ninja).cmd`""
 
     # 打包
     - name: Package binaries
