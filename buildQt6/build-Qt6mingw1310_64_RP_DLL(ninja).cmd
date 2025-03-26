@@ -64,6 +64,20 @@ cmake --build . --parallel
 cmake --install .
 cd ..
 
+::编译qtpdf
+git clone https://code.qt.io/qt/qtwebengine.git
+cd qtwebengine
+git checkout 6.8.2
+git submodule update --init --recursive
+cd ..
+pip3 install html5lib
+mkdir build
+cd build
+qt-configure-module ../qtwebengine -- -DFEATURE_qtwebengine_build=OFF
+cmake --build . --parallel
+cmake --install .
+cd ..
+
 ::复制qt.conf
 copy %~dp0\qt.conf %INSTALL_DIR%\bin
 
