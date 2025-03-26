@@ -8,7 +8,7 @@ SET QT_VERSION=6.8.2
 SET MinGW_VERSION=mingw1310_64
 
 :: 设置编译器和Ninja
-SET PATH=D:\a\buildQt\Tools\mingw1310_64\bin;D:\a\buildQt\ninja;D:\a\buildQt\tools;%PATH%
+SET PATH=D:\a\buildQt\Tools\mingw1310_64\bin;D:\a\buildQt\ninja;D:\a\buildQt\buildQt\tools;%PATH%
 
 :: 设置Qt文件夹路径
 SET QT_PATH=D:\a\buildQt\Qt
