@@ -33,16 +33,22 @@ mkdir "%BUILD_DIR%" && cd /d "%BUILD_DIR%"
 pip install html5lib
 
 :: configure
-call %SRC_QT%\configure.bat -static -static-runtime -release -prefix %INSTALL_DIR% -nomake examples -nomake tests -opensource -confirm-license -qt-libpng -qt-libjpeg -qt-zlib -qt-pcre -qt-freetype -schannel -platform win32-g++
+call %SRC_QT%\configure.bat -static -release -prefix %INSTALL_DIR% -nomake examples -nomake tests -opensource -confirm-license -qt-libpng -qt-libjpeg -qt-zlib -qt-pcre -qt-freetype -schannel -platform win32-g++
 
 :: 编译(不要忘记点)
-:: cmake --build . --parallel
+cmake --build . --parallel
 
 :: 安装(不要忘记点)
-:: cmake --install .
+cmake --install .
 
 ::复制qt.conf
-:: copy %~dp0\qt.conf %INSTALL_DIR%\bin
+copy %~dp0\qt.conf %INSTALL_DIR%\bin
+
+SET PATH=D:\a\buildQt\Tools\mingw1310_64\bin;D:\a\buildQt\ninja;D:\a\buildQt\buildQt\tools;%INSTALL_DIR%\bin;%PATH%
+git clone --recursive https://github.com/stdware/qwindowkit
+cd qwindowkit
+cmake -B build -S . -DCMAKE_PREFIX_PATH=%INSTALL_DIR%\bin -DCMAKE_INSTALL_PREFIX=D:/qwindowkit -DQWINDOWKIT_BUILD_STATIC=TRUE -G "MinGW Makefiles"
+cmake --build build --target install --config Release
 
 ::@pause
 @cmd /k cd /d %INSTALL_DIR%
