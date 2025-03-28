@@ -32,6 +32,9 @@ mkdir "%BUILD_DIR%" && cd /d "%BUILD_DIR%"
 :: 安装 html5lib
 pip install html5lib
 
+:: 安装 依赖
+pacman -S mingw-w64-x86_64-flex mingw-w64-x86_64-bison mingw-w64-x86_64-gperf
+
 :: configure
 call %SRC_QT%\configure.bat -static -release -prefix %INSTALL_DIR% -nomake examples -nomake tests -opensource -confirm-license -qt-libpng -qt-libjpeg -qt-zlib -qt-pcre -qt-freetype -schannel -platform win32-g++
 
