@@ -43,7 +43,7 @@ jobs:
       uses: microsoft/setup-msbuild@v2
       with:
         msbuild-architecture: x64
-        vs-version: '[14.16,14.16)'
+        vs-version: '[14.16,14.16]'
 
     # 安装vsdevenv
     - name: Setup vsdevenv
