@@ -39,15 +39,11 @@ jobs:
         unzip -q jom.zip -d ./jom
 
     # 安装msvc
-    - name: Add MSBuild to PATH
-      uses: microsoft/setup-msbuild@v2
+    - name: Setup VS2017
+      uses: ilammy/msvc-dev-cmd@v1
       with:
-        msbuild-architecture: x64
-        vs-version: '[14.16,14.16]'
-
-    # 安装vsdevenv
-    - name: Setup vsdevenv
-      uses: seanmiddleditch/gha-setup-vsdevenv@master
+        toolset: 14.16  # VS2017工具集版本
+        arch: x64
 
     # 构建Qt
     - name: Build Qt
